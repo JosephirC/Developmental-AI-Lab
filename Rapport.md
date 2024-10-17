@@ -149,7 +149,7 @@ Capture d'écran de l'exécution de l'agent 2 dans l'environnement 2.
 
 Dans la classe `Agent3`, on reprend les mêmes principes que pour `l'Agent 2`. De plus, l'agent a un tableau de booléens qui lui permet de savoir si une action a déjà été testée ou non. Ce tableau est utilisé pour choisir une action non testée lorsqu'il est ennuyé.
 
-L'agent 3 sert à apprendre à naviguer notre tortue (*l'agent*) dans un `ColabTurtleEnvironment`. Dans cette environnement, possède 3 actions possibles : avancer, tourner à gauche et tourner à droite. L'agent doit apprendre à naviguer dans l'environnement en evitant les murs.
+L'agent 3 sert à apprendre à naviguer notre tortue (*l'agent*) dans un `ColabTurtleEnvironment`. Dans cette environnement, possède 3 actions possibles : avancer, tourner à gauche et tourner à droite. L'agent doit apprendre à naviguer dans l'environnement en évitant les murs.
 
 - L'agent commence par choisir l'action 0 et anticipe un outcome par défaut de 0.
 
