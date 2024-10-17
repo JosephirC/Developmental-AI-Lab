@@ -56,7 +56,7 @@ class Agent1(Agent):
         return self._action
 ```
 
-### Les anticipations suivantes sont basées sur la mémoire de l'agent.
+### Les anticipations suivantes sont basées sur la mémoire de l'agent
 
 ![Agent1 dans l'environnement 1.](ReportImages/Agent1/Agent1_Env1.png)
 
@@ -138,7 +138,7 @@ class Agent2(Agent):
         return self._action
 ```
 
-### Les anticipations suivantes sont basées sur la mémoire de l'agent.
+### Les anticipations suivantes sont basées sur la mémoire de l'agent
 
 
 ![Agent2 dans l'environnemnt 2.](ReportImages/Agent2/Agent2_Env2.png)
