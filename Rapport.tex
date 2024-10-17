@@ -46,6 +46,8 @@
 \fancyhead[R]{Faure Alexandre (p2006157)} 
 \fancyfoot[C]{\thepage} 
 
+\renewcommand{\lstlistingname}{Code}
+
 \begin{document}
 
 \maketitle 
@@ -118,7 +120,6 @@
     \centering
     \includegraphics[width=0.7\textwidth]{ReportImages/Agent1/Agent1_Env1.png}
     \caption{Agent1 dans l'environnement 1.}
-    \label{fig:agent1_env1}
 \end{figure}
 
 \vspace{-20pt} 
@@ -148,7 +149,7 @@ Action 1 & 1 & -1 \\
 \end{tabular}
 \end{center}
 
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, caption={Implementation de l'Agent2}]
     class Agent2(Agent):
     def __init__(self, _valences):
         super().__init__(_valences)
@@ -214,7 +215,6 @@ Action 1 & 1 & -1 \\
     \centering
     \includegraphics[width=0.7\textwidth]{ReportImages/Agent2/Agent2_Env2.png}
     \caption{Agent2 dans l'environnement 2.}
-    \label{fig:agent2_env2}
 \end{figure}
 
 \vspace{-20pt}
@@ -252,7 +252,7 @@ Action 2 : Droite & 0 & 0 \\
 \end{tabular}
 \end{center}
 
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, caption={Implementation de l'Agent3}]
 import random
 
 class Agent3(Agent):
@@ -332,7 +332,6 @@ class Agent3(Agent):
     \includegraphics[width=0.7\textwidth]{ReportImages/Agent3/Agent3_tortue.png}
     \includegraphics[width=0.7\textwidth]{ReportImages/Agent3/Agent3_100_actions.png}
     \caption{Agent3 dans l'environnement ColabTurtleEnvironment.}
-    \label{fig:agent3_envTurtle}
 \end{figure}
 
 \newpage
@@ -365,8 +364,7 @@ Action 2 & -1 & 1 \\
 \end{tabular}
 \end{center}
 
-% code
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, caption={Implementation de l'Agent4}]
 import random
 
 class Agent4(Agent):
@@ -443,7 +441,6 @@ class Agent4(Agent):
     \centering
     \includegraphics[width=0.7\textwidth]{ReportImages/Agent4/Agent4_Env3.png}
     \caption{Agent4 dans l'environnement 3.}
-    \label{fig:agent4_env3}
 \end{figure}
 
 \newpage
@@ -456,7 +453,6 @@ class Agent4(Agent):
     \includegraphics[width=0.7\textwidth]{ReportImages/Agent4/Agent4_tortue.png}
     \includegraphics[width=0.7\textwidth]{ReportImages/Agent4/Agent4_50_actions.png}
     \caption{Agent4 dans l'environnement ColabTurtleEnvironment.}
-    \label{fig:agent4_envTurtle}
 \end{figure}
 
 \end{document}
