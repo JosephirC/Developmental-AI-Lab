@@ -1,17 +1,70 @@
-Abida Youssef (p2024398) Faure Alexandre (p2006157)
+\documentclass[a4paper, 12pt]{article} 
+\usepackage[left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
 
-# Agent 1
+% Définir des couleurs pour le code
+\definecolor{lightgray}{gray}{0.95}
+\definecolor{darkgray}{gray}{0.2}
 
-Dans la classe `Agent1`, l'agent a une mémoire qui stocke les résultats (*outcome*) associés à chaque action (0 ou 1). Cette mémoire lui permet d'apprendre à prédire les outcomes futurs basés sur ses interactions précédentes.
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{lightgray},   
+    commentstyle=\color{darkgray},
+    keywordstyle=\color{blue},
+    numberstyle=\tiny\color{darkgray},
+    stringstyle=\color{red},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=true,
+}
 
-- L'agent commence par choisir l'action 0 et anticipe un outcome par défaut de 0.
+\lstset{
+    style=mystyle,
+    basicstyle=\small,
+    columns=fullflexible,
+    numbers=none
+}
 
-- Lorsqu'une action produit un outcome différent de ce qui était anticipé, l'agent met à jour sa mémoire pour associer cet outcome à l'action correcte et le compteur d'ennui se réinitialise.
+\title{\vspace{-1.5cm} IA Dévelopmentale - Rapport des agents\vspace{-2cm}} 
+\date{}
 
-- Pour simuler l'ennui, l'agent change d'action après 4 cycles de bonnes prédictions d'outcome.
+\pagestyle{fancy}
+\fancyhf{} 
+\fancyhead[L]{Abida Youssef (p2024398)}
+\fancyhead[R]{Faure Alexandre (p2006157)} 
+\fancyfoot[C]{\thepage} 
 
-```py
-class Agent1(Agent):
+\begin{document}
+
+\maketitle 
+
+\thispagestyle{fancy}
+
+\renewcommand{\thesection}{\arabic{section}.}
+\section{Agent 1}
+
+\hspace*{\parindent} Dans la classe \texttt{Agent1}, l'agent a une mémoire qui stocke les résultats (\textit{outcome}) associés à chaque action (0 ou 1). Cette mémoire lui permet d'apprendre à prédire les outcomes futurs basés sur ses interactions précédentes.
+
+\begin{itemize}    
+    \item L'agent commence par choisir l'action 0 et anticipe un outcome par défaut de 0.
+    \item Lorsqu'une action produit un outcome différent de ce qui était anticipé, l'agent met à jour sa mémoire pour associer cet outcome à l'action correcte et le compteur d'ennui se réinitialise.
+    \item Pour simuler l'ennui, l'agent change d'action après 4 cycles de bonnes prédictions d'outcome.
+\end{itemize}
+
+\begin{lstlisting}[language=Python, caption={Implementation de l'Agent1}]
+    class Agent1(Agent):
     def __init__(self):
         super().__init__()
         self.memory = {0: None, 1: None}
@@ -54,41 +107,55 @@ class Agent1(Agent):
             self._predicted_outcome = self.memory[self._action]
         
         return self._action
-```
+\end{lstlisting}
 
-### Les anticipations suivantes sont basées sur la mémoire de l'agent.
+\bigskip
 
-![Agent1 dans l'environnement 1.](ReportImages/Agent1/Agent1_Env1.png)
+\noindent \large \textbf{Les anticipations suivantes sont basées sur la mémoire de l'agent}
+\normalsize
 
-Capture d'écran de l'exécution de l'agent 1 dans l'environnement 1. 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{ReportImages/Agent1/Agent1_Env1.png}
+    \caption{Agent1 dans l'environnement 1.}
+    \label{fig:agent1_env1}
+\end{figure}
 
-# Agent 2
+\vspace{-20pt} 
 
-Dans la classe `Agent2`, l'agent a une mémoire qui stocke les résultats (*outcome*) associés à chaque action (0 ou 1). Il dispose aussi d'un tableau de valences qui lui indique les préférences d'action à réaliser. Comme `l'Agent 1`, cette mémoire lui permet d'apprendre à prédire les outcomes futurs basés sur ses interactions précédentes.
+\section{Agent 2}
 
-- L'agent commence par choisir l'action 0 et anticipe un outcome par défaut de 0.
+\hspace*{\parindent} Dans la classe \texttt{Agent2}, l'agent a une mémoire qui stocke les résultats (\textit{outcome}) associés à chaque action (0 ou 1). Il dispose aussi d'un tableau de valences qui lui indique les préférences d'action à réaliser. Comme \texttt{l'Agent 1}, cette mémoire lui permet d'apprendre à prédire les outcomes futurs basés sur ses interactions précédentes.
 
-- Lorsqu'une action produit un outcome différent de ce qui était anticipé, l'agent met à jour sa mémoire pour associer cet outcome à l'action correcte. Il met à jour sa prédiction et le compteur d'ennui se réinitialise.
-
-- Pour choisir la meilleur action, l'agent compare les valences de chaque action et choisit celle qui a la valence la plus élevée.
-
-- Pour simuler l'ennui, l'agent change d'action après 4 cycles de bonnes prédictions d'outcome.
+\begin{itemize}
+    \item L'agent commence par choisir l'action 0 et anticipe un outcome par défaut de 0.
+    \item Lorsqu'une action produit un outcome différent de ce qui était anticipé, l'agent met à jour sa mémoire pour associer cet outcome à l'action correcte. Il met à jour sa prédiction et le compteur d'ennui se réinitialise.
+    \item Pour choisir la meilleur action, l'agent compare les valences de chaque action et choisit celle qui a la valence la plus élevée.
+    \item Pour simuler l'ennui, l'agent change d'action après 4 cycles de bonnes prédictions d'outcome.
+\end{itemize}
 
 Les valences définies pour l'environnement 2 sont les suivantes :
 
-|| outcome 0 | outcome 1 |
-|---|---|---|
-| action 0 | -1 | 1 |
-| action 1 | 1 | -1 |
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+& Outcome 0 & Outcome 1 \\
+\hline
+Action 0 & -1 & 1 \\
+\hline
+Action 1 & 1 & -1 \\
+\hline
+\end{tabular}
+\end{center}
 
-```py
-class Agent2(Agent):
+\begin{lstlisting}[language=Python]
+    class Agent2(Agent):
     def __init__(self, _valences):
         super().__init__(_valences)
         self.memory = dict()
         self._compteur = 0
         self._best_action = None
-        
+    
     def action(self, _outcome):
         """ tracing the previous cycle """
         if self._action is not None:
@@ -136,38 +203,56 @@ class Agent2(Agent):
             self._predicted_outcome = self.memory[self._action]
             
         return self._action
-```
+\end{lstlisting}
 
-### Les anticipations suivantes sont basées sur la mémoire de l'agent.
+\bigskip
 
+\noindent \large \textbf{Les anticipations suivantes sont basées sur la mémoire de l'agent}
+\normalsize
 
-![Agent2 dans l'environnemnt 2.](ReportImages/Agent2/Agent2_Env2.png)
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{ReportImages/Agent2/Agent2_Env2.png}
+    \caption{Agent2 dans l'environnement 2.}
+    \label{fig:agent2_env2}
+\end{figure}
 
-Capture d'écran de l'exécution de l'agent 2 dans l'environnement 2. 
+\vspace{-20pt}
 
-# Agent 3
+\section{Agent 3}
 
-Dans la classe `Agent3`, on reprend les mêmes principes que pour `l'Agent 2`. De plus, l'agent a un tableau de booléens qui lui permet de savoir si une action a déjà été testée ou non. Ce tableau est utilisé pour choisir une action non testée lorsqu'il est ennuyé.
+\hspace*{\parindent} Dans la classe \texttt{Agent3}, on reprend les mêmes principes que pour \texttt{l'Agent 2}. De plus, l'agent a un tableau de booléens qui lui permet de savoir si une action a déjà été testée ou non. Ce tableau est utilisé pour choisir une action non testée lorsqu'il est ennuyé.
 
-L'agent 3 sert à apprendre à naviguer notre tortue (*l'agent*) dans un `ColabTurtleEnvironment`. Dans cette environnement, possède 3 actions possibles : avancer, tourner à gauche et tourner à droite. L'agent doit apprendre à naviguer dans l'environnement en evitant les murs.
+\vspace{10pt}
 
-- L'agent commence par choisir l'action 0 et anticipe un outcome par défaut de 0.
+L'agent 3 sert à apprendre à naviguer notre tortue (\textit{l'agent}) dans l'environnement \texttt{ColabTurtleEnvironment}. Dans cet environnement, trois actions sont possibles : avancer, tourner à gauche et tourner à droite. L'agent doit apprendre à naviguer dans l'environnement en évitant les murs.
 
-- Lorsqu'une action produit un outcome différent de ce qui était anticipé, l'agent met à jour sa mémoire pour associer cet outcome à l'action correcte. Il met à jour sa prédiction et le compteur d'ennui se réinitialise.
+\newpage
 
-- Pour choisir la meilleur action, l'agent compare les valences de chaque action et choisit celle qui a la valence la plus élevée. Si plusieurs actions ont la même valence, l'agent choisit aléatoirement parmi ces actions.
-
-- Pour simuler l'ennui, l'agent change d'action après 4 cycles de bonnes prédictions d'outcome. Lorsqu'il est ennuyé, l'agent choisit une action non testée.
+\begin{itemize}
+    \item L'agent commence par choisir l'action 0 et anticipe un outcome par défaut de 0.
+    \item Lorsqu'une action produit un outcome différent de ce qui était anticipé, l'agent met à jour sa mémoire pour associer cet outcome à l'action correcte. Il met à jour sa prédiction et le compteur d'ennui se réinitialise.
+    \item Pour choisir la meilleur action, l'agent compare les valences de chaque action et choisit celle qui a la valence la plus élevée. Si plusieurs actions ont la même valence, l'agent choisit aléatoirement parmi ces actions.
+    \item Pour simuler l'ennui, l'agent change d'action après 4 cycles de bonnes prédictions d'outcome. Lorsqu'il est ennuyé, l'agent choisit une action non testée.
+\end{itemize}
 
 Les valences définies pour l'environnement 3 sont les suivantes :
 
-|| 0 Not bump | 1 Bump|
-|---|---|---|
-| 0 Forward| 1 | -1 |
-| 1 Left | -1 | -1 |
-| 2 Right| -1 | -1 |
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+& Outcome 0 : Ne pas cogner & Outcome 1 : Cogner \\
+\hline
+Action 0 : Avancer & 0 & 0 \\
+\hline
+Action 1 : Gauche & 1 & 1 \\
+\hline
+Action 2 : Droite & 0 & 0 \\
+\hline
+\end{tabular}
+\end{center}
 
-```py
+\begin{lstlisting}[language=Python]
 import random
 
 class Agent3(Agent):
@@ -235,37 +320,53 @@ class Agent3(Agent):
             self._predicted_outcome = self.memory[self._action]
             
         return self._action
-```
+\end{lstlisting}
 
-### Résultats de 100 actions de l'agent 3 dans un ColabTurtleEnvironment
+\newpage
 
-![Agent3 tortue.](ReportImages/Agent3/Agent3_tortue.png)
+\noindent \large \textbf{Résultats de 100 actions de l'agent 3 dans un ColabTurtleEnvironment}
+\normalsize
 
-![Agent3 100 actions.](ReportImages/Agent3/Agent3_100_actions.png)
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{ReportImages/Agent3/Agent3_tortue.png}
+    \includegraphics[width=0.7\textwidth]{ReportImages/Agent3/Agent3_100_actions.png}
+    \caption{Agent3 dans l'environnement ColabTurtleEnvironment.}
+    \label{fig:agent3_envTurtle}
+\end{figure}
 
+\newpage
 
-# Agent 4
+\section{Agent 4}
 
-Dans la classe `Agent4`, l'agent a une mémoire qui lui permet de stocker le couple d'intéractions précédentes et les interactions tentées. L'agent apprend à prédire les outcomes futurs basés sur ses interactions précédentes. 
+\hspace*{\parindent} Dans la classe \texttt{Agent4}, l'agent a une mémoire qui lui permet de stocker le couple d'intéractions précédentes et les interactions tentées. L'agent apprend à prédire les outcomes futurs basés sur ses interactions précédentes.
 
-- Si le couple clé (*t-1, t*) n'est pas dans la mémoire, alors on lui assigne une valeur à `None` et lors du prochain calcule de l'action, on lui assigne la valeur de l'outcome. 
-
-- Si le compteur est inférieur ou égal à 3, alors on regarde dans la mémoire si on a une interaction qui correspond à la clé (*t-1, t*) et si l'outcome est supérieur à 0, alors on choisit cette interaction.
-
-- Si le compteur est supérieur à 3, alors on simule l'ennui. On choisit une action aléatoire parmi les actions possibles.
-
-- Pour choisir la meilleur action, l'agent compare les valences de chaque action et choisit celle qui a la valence la plus élevée.
-
+% itemize
+\begin{itemize}
+    \item Si le couple clé (*t-1, t*) n'est pas dans la mémoire, alors on lui assigne une valeur à `None` et lors du prochain calcule de l'action, on lui assigne la valeur de l'outcome.
+    \item Si le compteur est inférieur ou égal à 3, alors on regarde dans la mémoire si on a une interaction qui correspond à la clé (*t-1, t*) et si l'outcome est supérieur à 0, alors on choisit cette interaction.
+    \item Si le compteur est supérieur à 3, alors on simule l'ennui. On choisit une action aléatoire parmi les actions possibles.
+    \item Pour choisir la meilleur action, l'agent compare les valences de chaque action et choisit celle qui a la valence la plus élevée.
+\end{itemize}
 
 Les valences définies pour l'environnement sont les suivantes :
 
-|| outcome 0 | outcome 1|
-|---|---|---|
-| action 0| -1 | 1 |
-| action 1 | -1 | 1 |
-| action 2 | -1 | 1 |
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+& Outcome 0 & Outcome 1 \\
+\hline
+Action 0 & -1 & 1 \\
+\hline
+Action 1 & -1 & 1 \\
+\hline
+Action 2 & -1 & 1 \\
+\hline
+\end{tabular}
+\end{center}
 
-```py
+% code
+\begin{lstlisting}[language=Python]
 import random
 
 class Agent4(Agent):
@@ -331,16 +432,31 @@ class Agent4(Agent):
         if (previous_interaction.key(),self._intended_interaction.key()) not in self._memory:
             self._memory[(previous_interaction.key(),self._intended_interaction.key())] = None
         return intended_action
-```
+\end{lstlisting}
 
-### Les anticipations suivantes sont basées sur la mémoire de l'agent
+\newpage
 
-![Agent4 dans l'environnemnt 4.](ReportImages/Agent4/Agent4_Env3.png)
+\noindent \large \textbf{Les anticipations suivantes sont basées sur la mémoire de l'agent}
+\normalsize
 
-Capture d'écran de l'exécution de l'agent 4 dans l'environnement 3 pour 50 actions. 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{ReportImages/Agent4/Agent4_Env3.png}
+    \caption{Agent4 dans l'environnement 3.}
+    \label{fig:agent4_env3}
+\end{figure}
 
-### Résultats de 50 actions de l'agent 4 dans un ColabTurtleEnvironment
+\newpage
 
-![Agent4 tortue.](ReportImages/Agent4/Agent4_tortue.png)
+\noindent \large \textbf{Résultats de 50 actions de l'agent 4 dans un ColabTurtleEnvironment}
+\normalsize
 
-![Agent4 50 actions.](ReportImages/Agent4/Agent4_50_actions.png)
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{ReportImages/Agent4/Agent4_tortue.png}
+    \includegraphics[width=0.7\textwidth]{ReportImages/Agent4/Agent4_50_actions.png}
+    \caption{Agent4 dans l'environnement ColabTurtleEnvironment.}
+    \label{fig:agent4_envTurtle}
+\end{figure}
+
+\end{document}
